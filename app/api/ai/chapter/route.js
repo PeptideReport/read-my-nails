@@ -63,10 +63,20 @@ return NextResponse.json({ draft: data, dropped });
 }
 
 // PUT { id, sets?, title?, action: 'save'|'approve'|'global'|'discard' }
+//   plus admin-only { action: 'remove', code, tenant } to pull a live custom chapter that no draft owns
+//   (e.g. one stranded before discard learned to clean up after itself).
 export async function PUT(req) {
 const [me, err] = await gate(req); if (err) return err;
 const b = await req.json().catch(() => ({}));
 const db = sb();
+if (b.action === 'remove') {
+if (!me.isAdmin) return NextResponse.json({ error: 'admin only' }, { status: 403 });
+const code = String(b.code || '').toUpperCase().trim();
+const tenant = b.tenant === '*' ? '*' : String(b.tenant || '').trim();
+if (!code || !tenant) return NextResponse.json({ error: 'code and tenant required' }, { status: 400 });
+const { error } = await db.from('custom_chapters').delete().eq('code', code).eq('tenant', tenant);
+return error ? NextResponse.json({ error: error.message }, { status: 500 }) : NextResponse.json({ ok: true, removed: { code, tenant } });
+}
 const { data: d } = await db.from('drafts').select('*').eq('id', b.id).maybeSingle();
 if (!d || (!me.isAdmin && !me.salons.some(s => s.tenant === d.tenant))) return NextResponse.json({ error: 'not yours' }, { status: 403 });
 if (d.status === 'submitted' && !me.isAdmin) return NextResponse.json({ error: 'admin only' }, { status: 403 });
