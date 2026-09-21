@@ -33,7 +33,7 @@ const tenant = me.salons.find(s => s.tenant === b.tenant)?.tenant || (me.isAdmin
 const theme = String(b.theme || '').trim().slice(0, 200); if (theme.length < 3) return NextResponse.json({ error: 'Give the chapter a theme.' }, { status: 400 });
 const db = sb();
 if (!me.isAdmin) {
-const { count } = await db.from('drafts').select('id', { count: 'exact', head: true }).eq('tenant', tenant).gte('created_at', new Date(Date.now() - 30 * 864e5).toISOString());
+const { count } = await db.from('drafts').select('id', { count: 'exact', head: true }).eq('tenant', tenant).neq('status', 'discarded').gte('created_at', new Date(Date.now() - 30 * 864e5).toISOString());
 if ((count || 0) >= MONTHLY) return NextResponse.json({ error: `That's ${MONTHLY} custom chapters this month — your allowance resets next month.` }, { status: 429 });
 }
 // The theme itself goes through the screen first — no chapter about a brand.
