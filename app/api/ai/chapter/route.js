@@ -2,11 +2,15 @@ import { NextResponse } from 'next/server';
 import { sb, currentUser, ACTIVE } from '../../../../lib/supabase';
 import { configured, writeChapter, chapterCode, normalizeSets } from '../../../../lib/ai';
 import { screenMarks } from '../../../../lib/trust';
+import { allChapters } from '../../../../lib/library';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
 
 const MONTHLY = 5; // AI chapter generations per salon per month; admins unlimited
+// Built-in library codes a custom chapter must never reuse — otherwise it shadows/duplicates a real
+// library chapter on the kiosk (e.g. a "Prom" chapter would grab EN-PROM, the library's own code).
+const LIBRARY_CODES = new Set(allChapters().map(c => c.code));
 
 async function gate(req) {
 const me = await currentUser(req); if (!me) return [null, NextResponse.json({ error: 'login' }, { status: 401 })];
@@ -86,7 +90,7 @@ if (action === 'global' && !me.isAdmin) return NextResponse.json({ error: 'admin
 const sets = patch.sets || d.sets; const title = patch.title || d.title || d.theme;
 // unique chapter code for this scope
 let code = chapterCode(d.lang, title); const scope = action === 'global' ? '*' : d.tenant;
-for (let i = 2; i < 30; i++) { let q = db.from('custom_chapters').select('code').eq('code', code); q = q.eq('tenant', scope); const { data: x } = await q.maybeSingle(); if (!x || x.code === d.code) break; code = code.slice(0, -1) + String(i % 10); }
+for (let i = 2; i < 30; i++) { const libClash = LIBRARY_CODES.has(code); const { data: x } = await db.from('custom_chapters').select('code').eq('code', code).eq('tenant', scope).maybeSingle(); const customClash = x && x.code !== d.code; if (!libClash && !customClash) break; code = code.slice(0, -1) + String(i % 10); }
 const coded = sets.map((s, i) => ({ ...s, c: `${code}-${String(i + 1).padStart(2, '0')}` }));
 const credit = d.creator ? ` — by ${d.creator.name}${d.creator.instagram ? ' (@' + d.creator.instagram + ')' : ''}` : '';
 const row = { code, tenant: scope, lang: d.lang, title, blurb: (d.blurb || '') + credit, sets: coded, creator: d.creator || null };
