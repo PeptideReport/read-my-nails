@@ -86,7 +86,7 @@ const credit = d.creator ? ` — by ${d.creator.name}${d.creator.instagram ? ' (
 const row = { code, tenant: scope, lang: d.lang, title, blurb: (d.blurb || '') + credit, sets: coded, creator: d.creator || null };
 const { error } = await db.from('custom_chapters').upsert(row, { onConflict: 'code,tenant' });
 if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-patch.status = action; patch.code = code; patch.sets = coded;
+patch.status = action === 'approve' ? 'approved' : action; patch.code = code; patch.sets = coded;
 }
 const { data, error } = await db.from('drafts').update(patch).eq('id', d.id).select('*').single();
 return error ? NextResponse.json({ error: error.message }, { status: 500 }) : NextResponse.json({ draft: data });
