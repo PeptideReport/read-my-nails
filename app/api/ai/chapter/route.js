@@ -6,7 +6,7 @@ import { screenMarks } from '../../../../lib/trust';
 export const runtime = 'nodejs';
 export const maxDuration = 60;
 
-const DAILY = 10; // drafts per salon per day; admins unlimited
+const MONTHLY = 5; // AI chapter generations per salon per month; admins unlimited
 
 async function gate(req) {
 const me = await currentUser(req); if (!me) return [null, NextResponse.json({ error: 'login' }, { status: 401 })];
@@ -33,8 +33,8 @@ const tenant = me.salons.find(s => s.tenant === b.tenant)?.tenant || (me.isAdmin
 const theme = String(b.theme || '').trim().slice(0, 200); if (theme.length < 3) return NextResponse.json({ error: 'Give the chapter a theme.' }, { status: 400 });
 const db = sb();
 if (!me.isAdmin) {
-const { count } = await db.from('drafts').select('id', { count: 'exact', head: true }).eq('tenant', tenant).gte('created_at', new Date(Date.now() - 864e5).toISOString());
-if ((count || 0) >= DAILY) return NextResponse.json({ error: `That's ${DAILY} chapters today. Tomorrow.` }, { status: 429 });
+const { count } = await db.from('drafts').select('id', { count: 'exact', head: true }).eq('tenant', tenant).gte('created_at', new Date(Date.now() - 30 * 864e5).toISOString());
+if ((count || 0) >= MONTHLY) return NextResponse.json({ error: `That's ${MONTHLY} custom chapters this month — your allowance resets next month.` }, { status: 429 });
 }
 // The theme itself goes through the screen first — no chapter about a brand.
 const themeCheck = await screenMarks([theme], { lang: b.lang || 'en', context: 'This is a requested chapter theme, not a nail mark.' });
