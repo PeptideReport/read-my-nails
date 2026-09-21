@@ -1,0 +1,9 @@
+{
+  "_note": "Export profiles. 'assumed: true' means the dimensions/background are a sensible guess, not a spec from the maker — confirm with each machine's manual and edit here. The engine renders once at 1500×2250 transparent and packs to the profile.",
+  "o2nails":        { "label": "O’2NAILS (X11 Plus, X12.5, X30, V11)", "width": 1500, "height": 2250, "background": null,     "format": "png",  "assumed": true,  "note": "Library's native format, chosen not confirmed: the maker publishes 2400 DPI and no image spec. Owner reports say the app fits any image to the nail. Set assumed=false after the X11 Plus test print (Printer-Format-Confirmations.md)." },
+  "jolimark":       { "label": "Jolimark NP-101D / NP-311D",           "width": 1200, "height": 1800, "background": "#FFFFFF", "format": "png",  "assumed": true,  "note": "White background; Jolimark's gallery importer rejected transparency in one owner report." },
+  "sunwin":         { "label": "Sunwin NA03 / NA04",                    "width": 1080, "height": 1620, "background": "#FFFFFF", "format": "jpg",  "assumed": true,  "note": "JPEG on white." },
+  "wm860":          { "label": "Widermatrix WM860 vending upload",      "width": 1024, "height": 1024, "background": "#FFFFFF", "format": "jpg",  "assumed": true,  "note": "Square upload via QR; the machine resizes. Mark is centered on a square canvas." },
+  "fingernails2go": { "label": "Fingernails2Go photo path",             "width": 1000, "height": 1500, "background": "#FFFFFF", "format": "jpg",  "assumed": true,  "note": "Goes in as a 'photo' through their app." },
+  "generic":        { "label": "Any printer that takes PNG",            "width": 1500, "height": 2250, "background": null,     "format": "png",  "assumed": false, "note": "Transparent PNG, portrait 2:3." }
+}
