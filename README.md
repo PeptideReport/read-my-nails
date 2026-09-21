@@ -1,6 +1,7 @@
 # readmynails.com — v2.3 (the complete engine)
 
 <!-- GitHub → Vercel auto-deploy connected -->
+<!-- staging preview test 2026-09-20 -->
 
 **Developers start with `HANDOFF-DEV.md`.**
 
