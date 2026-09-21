@@ -74,7 +74,13 @@ for (const s of sets) { const v = await screenMarks(marksOf(s), { lang: d.lang.t
 patch.sets = sets;
 }
 const action = b.action || 'save';
-if (action === 'discard') patch.status = 'discarded';
+if (action === 'discard') {
+patch.status = 'discarded';
+// Discard means gone. If this draft was already live, pull the kiosk chapter too — otherwise a
+// direct API call could approve → discard to keep the chapter live AND free a monthly-cap slot.
+if (d.code && d.status === 'approved') await db.from('custom_chapters').delete().eq('code', d.code).eq('tenant', d.tenant);
+else if (d.code && d.status === 'global' && me.isAdmin) await db.from('custom_chapters').delete().eq('code', d.code).eq('tenant', '*');
+}
 if (action === 'approve' || action === 'global') {
 if (action === 'global' && !me.isAdmin) return NextResponse.json({ error: 'admin only' }, { status: 403 });
 const sets = patch.sets || d.sets; const title = patch.title || d.title || d.theme;
