@@ -1,5 +1,7 @@
 # readmynails.com — v2.3 (the complete engine)
 
+<!-- GitHub → Vercel auto-deploy connected -->
+
 **Developers start with `HANDOFF-DEV.md`.**
 
 One Next.js app. Public: landing (EN + ES), the whole library as browsable pages (123 chapter pages, 1,379 set pages with share images), the nail-printer buyer's guide, the salon directory with a map, party links. Paid: Stripe subscription checkout in three tiers, salon dashboard (downloads, kiosk address, PIN, profile + directory listing, 30-day chapter sales, network trending, billing), the set generator, and every licensee's kiosk app at `/k/<salon>`. Supabase holds the data and the files. Vercel serves it. Resend sends the emails.
