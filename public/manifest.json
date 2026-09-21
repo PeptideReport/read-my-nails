@@ -1,0 +1,1 @@
+{ "name": "Read My Nails", "short_name": "Read My Nails", "start_url": ".", "display": "standalone", "background_color": "#FFF8FB", "theme_color": "#F27BA5", "icons": [{ "src": "/logo.png", "sizes": "1458x300", "type": "image/png" }] }
