@@ -74,22 +74,13 @@ alter table salons drop constraint if exists salons_stripe_customer_id_key;
 create table if not exists drafts (
 id bigserial primary key, tenant text references tenants(id), lang text not null default 'EN', theme text not null, title text, blurb text,
 sets jsonb not null, status text not null default 'draft' check (status in ('draft','approved','global','discarded')),
-code text, created_by text, creator jsonb, created_at timestamptz default now(), updated_at timestamptz default now()
+code text, created_by text, created_at timestamptz default now(), updated_at timestamptz default now()
 );
 create index if not exists drafts_tenant on drafts (tenant, created_at desc);
-alter table drafts add column if not exists creator jsonb;
-alter table drafts drop constraint if exists drafts_status_check;
-alter table drafts add constraint drafts_status_check check (status in ('draft','submitted','approved','global','discarded'));
-alter table custom_chapters add column if not exists creator jsonb;
-
--- Creator royalties: orders per network chapter in the last 30 days (admin pays share_pct manually).
-create or replace view creator_orders as
-select split_part(set_code,'-',1)||'-'||split_part(set_code,'-',2) as chapter, count(*) as orders
-from orders where created_at > now() - interval '30 days' and set_code is not null group by 1;
 
 -- Approved chapters served to the kiosk app alongside the library. tenant '*' = every salon (network chapter).
 create table if not exists custom_chapters (
-code text not null, tenant text not null default '*', lang text not null, title text not null, blurb text, sets jsonb not null, creator jsonb,
+code text not null, tenant text not null default '*', lang text not null, title text not null, blurb text, sets jsonb not null,
 created_at timestamptz default now(), primary key (code, tenant)
 );
 
