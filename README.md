@@ -24,15 +24,17 @@ Do these in order. Every value you copy goes into Vercel in step 5.
 7. **Project Settings → API**: copy **Project URL**, **anon public** key, **service_role** key.
 
 ### 2. Stripe (20 min) — PRICING-SPEC-v1
-1. **Product catalog → Add product** `Read My Nails`. Add eight prices and copy each price ID (`price_…`) into the matching env var:
-   - `STRIPE_PRICE_START` — **$29 one-time** (Start pack, 5 chapter credits)
-   - `STRIPE_PRICE_MONTHLY` — **$9.99/month** recurring (Monthly chapter, 1 credit a month)
-   - `STRIPE_PRICE_SALON` — **$59/month** recurring (Salon: app + generator + directory + 2 credits/month)
-   - `STRIPE_PRICE_MULTI` — **$149/month** recurring (Multi-location, 3 locations, 6 credits/month)
-   - `STRIPE_PRICE_LIBRARY` — **$699 one-time** (Whole Library)
-   - `STRIPE_PRICE_DROPS` — **$9.99/month** recurring (New-chapter drops, Whole Library owners)
-   - `STRIPE_PRICE_CHAPTER1` — **$14.99 one-time** (1 extra chapter)
-   - `STRIPE_PRICE_CHAPTER3` — **$35 one-time** (3 extra chapters)
+1. **Product catalog → Add product** `Read My Nails`. Add ten prices and copy each price ID (`price_…`) into the matching env var:
+- `STRIPE_PRICE_START` — **$29 one-time** (Start pack, 5 chapter credits)
+- `STRIPE_PRICE_MONTHLY` — **$9.99/month** recurring (Monthly chapter, 1 credit a month)
+- `STRIPE_PRICE_SALON` — **$59/month** recurring (Salon: app + generator + directory + 2 credits/month)
+- `STRIPE_PRICE_MULTI` — **$149/month** recurring (Multi-location, 3 locations, 6 credits/month)
+- `STRIPE_PRICE_LIBRARY` — **$699 one-time** (Whole Library)
+- `STRIPE_PRICE_DROPS` — **$9.99/month** recurring (New-chapter drops, Whole Library owners)
+- `STRIPE_PRICE_CHAPTER1` — **$14.99 one-time** (1 extra chapter — a *library* chapter claim)
+- `STRIPE_PRICE_CHAPTER3` — **$35 one-time** (3 extra chapters)
+- `STRIPE_PRICE_GEN1` — **$14.99 one-time** (1 extra AI-generation credit — past the free 5/month on **Write a chapter**; a separate balance from the chapter-claim credits above, see `lib/access.js`)
+- `STRIPE_PRICE_GEN3` — **$35 one-time** (3 extra AI-generation credits)
 2. No coupons are needed. (Promotion codes still work at checkout if you make one.)
 3. **Developers → API keys**: copy the Secret key. Test keys first if you want a dry run (card 4242 4242 4242 4242).
 4. **Developers → Webhooks → Add endpoint**: `https://readmynails.com/api/stripe-webhook`; events `checkout.session.completed`, `invoice.paid`, `customer.subscription.updated`, `customer.subscription.deleted`, `invoice.payment_failed`. Copy the signing secret.
@@ -50,7 +52,7 @@ console.anthropic.com → **API Keys → Create key**. That is `ANTHROPIC_API_KE
 ### 5. Vercel (10 min)
 1. vercel.com → **Add New → Project** → drag this folder in (or import from GitHub). Framework Next.js.
 2. **Environment Variables** — every line of `.env.example`:
-   `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_START`, `STRIPE_PRICE_MONTHLY`, `STRIPE_PRICE_SALON`, `STRIPE_PRICE_MULTI`, `STRIPE_PRICE_LIBRARY`, `STRIPE_PRICE_DROPS`, `STRIPE_PRICE_CHAPTER1`, `STRIPE_PRICE_CHAPTER3`, `NEXT_PUBLIC_SITE_URL=https://readmynails.com`, `ADMIN_EMAILS=scottdelboccio@gmail.com`, `RESEND_API_KEY`, `EMAIL_FROM`, `CRON_SECRET` (any long random string; Vercel sends it with the daily cron), `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`.
+`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PRICE_START`, `STRIPE_PRICE_MONTHLY`, `STRIPE_PRICE_SALON`, `STRIPE_PRICE_MULTI`, `STRIPE_PRICE_LIBRARY`, `STRIPE_PRICE_DROPS`, `STRIPE_PRICE_CHAPTER1`, `STRIPE_PRICE_CHAPTER3`, `STRIPE_PRICE_GEN1`, `STRIPE_PRICE_GEN3`, `NEXT_PUBLIC_SITE_URL=https://readmynails.com`, `ADMIN_EMAILS=scottdelboccio@gmail.com`, `RESEND_API_KEY`, `EMAIL_FROM`, `CRON_SECRET` (any long random string; Vercel sends it with the daily cron), `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`.
 3. **Deploy**, then **Settings → Domains** → `readmynails.com` and `www.readmynails.com`.
 4. Open the site. Log in with your Gmail → the Naples salon (free, plan `house`) and every salon that signs up (admin view), plus the partners table.
 
@@ -80,7 +82,7 @@ Pricing → fake salon → pay (test card) → Welcome → login link → dashbo
 | `sitemap.xml`, `robots.txt` | ~1,500 URLs. Submit the sitemap in Google Search Console the day the domain is live. |
 
 ## The language layer (v2.2)
-- **Write a chapter** (dashboard): theme + language + count → the engine writes in the house voice (`lib/ai.js`, `HOUSE` prompt, eight library sets as examples), screens every set, saves a draft. You edit marks and phrases, remove sets, then **Approve → my kiosk**. Approved chapters get a code (`EN-VBALL`, sets `EN-VBALL-01…`) and appear in that salon's kiosk app on the next load. Admins can **Publish to every salon**. 10 chapters per salon per day.
+- **Write a chapter** (dashboard): theme + language + count → the engine writes in the house voice (`lib/ai.js`, `HOUSE` prompt, eight library sets as examples), screens every set, saves a draft. You edit marks and phrases, remove sets, then **Approve → my kiosk**. Approved chapters get a code (`EN-VBALL`, sets `EN-VBALL-01…`) and appear in that salon's kiosk app on the next load. Admins can **Publish to every salon**. **5 free generations per salon per month** (`MONTHLY` in `app/api/ai/chapter/route.js`; discarded drafts don't count against it, and the check is race-safe — see the comments in that file). Past the free 5, a salon can buy more from the dashboard: +1 generation for $14.99 or +3 for $35 (`STRIPE_PRICE_GEN1` / `STRIPE_PRICE_GEN3`), a balance kept separate from library-chapter-claim credits.
 - **Say it for me** (kiosk, Customer tab): "Tell me three things you love" → keyword retrieval over the library, then the model picks the best fits and writes up to two fresh sets for her. Fresh sets order as `CUSTOM`.
 - **What people are asking for** (dashboard): every generator phrase, chapter theme and "say it for me" request, tallied for 30 days. That list is next month's chapter.
 - Ten languages in the writer's menu. English and Spanish have library examples; the others are written natively by the model — have a native speaker read a chapter before you publish it to every salon.
@@ -118,3 +120,4 @@ Prices are text in `app/page.js` / `app/es/page.js` and IDs in Vercel env vars: 
 - Partner payouts are manual: the admin table shows salons per code; pay `share_pct` of year one however you like.
 - The kiosk pay-ahead (`/api/checkout`) sends money to *your* Stripe. Don't offer it to licensees without Stripe Connect.
 - Photos on photo-nails are stored in the order row (~40 KB). Move to Storage if a salon does hundreds a day.
+- AI-generation overage credits (`gen1`/`gen3`) and library-chapter-claim credits (`chapter1`/`chapter3`) are priced the same but are **separate balances** (`credit_grants.kind`) — buying one never lets you spend on the other. Needs the one-line `credit_grants` migration in `supabase/schema.sql` (`alter table ... add column if not exists kind ...`) run once in the SQL Editor if you're upgrading an existing database.
