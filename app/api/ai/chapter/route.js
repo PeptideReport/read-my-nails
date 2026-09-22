@@ -59,6 +59,17 @@ await db.from('requests').insert({ tenant, lang: b.lang || 'EN', kind: 'chapter'
 const row = { tenant, lang: (b.lang || 'EN').toUpperCase(), theme, title: out.title, blurb: out.blurb, sets: kept, status: 'draft', created_by: me.email };
 const { data, error } = await db.from('drafts').insert(row).select('*').single();
 if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+// The count-check above and this insert are two separate round-trips, not one transaction — two requests
+// that both land while the count is still under the cap can both pass and both insert. Re-count with this
+// row included and self-heal if we lost that race: delete our own insert rather than let a 6th one stand.
+if (!me.isAdmin) {
+const since = new Date(Date.now() - 30 * 864e5).toISOString();
+const { count: after } = await db.from('drafts').select('id', { count: 'exact', head: true }).eq('tenant', tenant).neq('status', 'discarded').gte('created_at', since);
+if ((after || 0) > MONTHLY) {
+await db.from('drafts').delete().eq('id', data.id);
+return NextResponse.json({ error: `That's ${MONTHLY} custom chapters this month — your allowance resets next month.` }, { status: 429 });
+}
+}
 return NextResponse.json({ draft: data, dropped });
 }
 
