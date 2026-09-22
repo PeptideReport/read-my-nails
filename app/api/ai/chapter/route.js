@@ -3,6 +3,7 @@ import { sb, currentUser, ACTIVE } from '../../../../lib/supabase';
 import { configured, writeChapter, chapterCode, normalizeSets } from '../../../../lib/ai';
 import { screenMarks } from '../../../../lib/trust';
 import { allChapters } from '../../../../lib/library';
+import { balance, spendGenerationCredit } from '../../../../lib/access';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -19,13 +20,15 @@ return [me, null];
 }
 const marksOf = s => (s.n || s.sp?.flat() || []).map(x => x.split('|')[0]);
 
-// GET → this account's drafts (admin: all)
+// GET → this account's drafts (admin: all), plus any purchased AI-generation credit balance
 export async function GET(req) {
 const [me, err] = await gate(req); if (err) return err;
-let q = sb().from('drafts').select('*').neq('status', 'discarded').order('created_at', { ascending: false }).limit(60);
+const db = sb();
+let q = db.from('drafts').select('*').neq('status', 'discarded').order('created_at', { ascending: false }).limit(60);
 if (!me.isAdmin) q = q.in('tenant', me.salons.map(s => s.tenant)).neq('status', 'submitted');
 const { data } = await q;
-return NextResponse.json({ configured: configured(), drafts: data || [] });
+const genCredits = me.isAdmin ? null : await balance(db, me.email, 'ai_gen');
+return NextResponse.json({ configured: configured(), drafts: data || [], genCredits });
 }
 
 // POST { tenant, theme, lang, count, audience, notes } → writes a chapter, screens every set, saves a draft
@@ -36,9 +39,17 @@ const b = await req.json().catch(() => ({}));
 const tenant = me.salons.find(s => s.tenant === b.tenant)?.tenant || (me.isAdmin ? null : me.salons[0]?.tenant);
 const theme = String(b.theme || '').trim().slice(0, 200); if (theme.length < 3) return NextResponse.json({ error: 'Give the chapter a theme.' }, { status: 400 });
 const db = sb();
+// Set once we spend a purchased overage credit below, so the post-insert self-heal check (which only
+// polices the free 5/month tier) knows to leave this draft alone.
+let paidOverage = false;
 if (!me.isAdmin) {
 const { count } = await db.from('drafts').select('id', { count: 'exact', head: true }).eq('tenant', tenant).neq('status', 'discarded').gte('created_at', new Date(Date.now() - 30 * 864e5).toISOString());
-if ((count || 0) >= MONTHLY) return NextResponse.json({ error: `That's ${MONTHLY} custom chapters this month — your allowance resets next month.` }, { status: 429 });
+if ((count || 0) >= MONTHLY) {
+// Over the free allowance — spend one purchased AI-generation credit instead of blocking outright.
+const spend = await spendGenerationCredit(db, me.email);
+if (!spend.ok) return NextResponse.json({ error: `That's ${MONTHLY} custom chapters this month. ${spend.error}`, needCredits: true }, { status: 429 });
+paidOverage = true;
+}
 }
 // The theme itself goes through the screen first — no chapter about a brand.
 const themeCheck = await screenMarks([theme], { lang: b.lang || 'en', context: 'This is a requested chapter theme, not a nail mark.' });
@@ -59,18 +70,20 @@ await db.from('requests').insert({ tenant, lang: b.lang || 'EN', kind: 'chapter'
 const row = { tenant, lang: (b.lang || 'EN').toUpperCase(), theme, title: out.title, blurb: out.blurb, sets: kept, status: 'draft', created_by: me.email };
 const { data, error } = await db.from('drafts').insert(row).select('*').single();
 if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-// The count-check above and this insert are two separate round-trips, not one transaction — two requests
-// that both land while the count is still under the cap can both pass and both insert. Re-count with this
-// row included and self-heal if we lost that race: delete our own insert rather than let a 6th one stand.
-if (!me.isAdmin) {
+// The count-check above and this insert are two separate round-trips, not one transaction — two free-tier
+// requests that both land while the count is still under the cap can both pass and both insert. Re-count with
+// this row included and self-heal if we lost that race: delete our own insert rather than let a 6th free one
+// stand. A paid-overage insert already went through its own guarded credit spend above, so it's exempt —
+// re-running this check against it would wrongly delete a chapter the salon just paid for.
+if (!me.isAdmin && !paidOverage) {
 const since = new Date(Date.now() - 30 * 864e5).toISOString();
 const { count: after } = await db.from('drafts').select('id', { count: 'exact', head: true }).eq('tenant', tenant).neq('status', 'discarded').gte('created_at', since);
 if ((after || 0) > MONTHLY) {
 await db.from('drafts').delete().eq('id', data.id);
-return NextResponse.json({ error: `That's ${MONTHLY} custom chapters this month — your allowance resets next month.` }, { status: 429 });
+return NextResponse.json({ error: `That's ${MONTHLY} custom chapters this month — your allowance resets next month.`, needCredits: true }, { status: 429 });
 }
 }
-return NextResponse.json({ draft: data, dropped });
+return NextResponse.json({ draft: data, dropped, paidOverage });
 }
 
 // PUT { id, sets?, title?, action: 'save'|'approve'|'global'|'discard' }
