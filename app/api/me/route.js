@@ -5,7 +5,10 @@ import { setByCode } from '../../../lib/library';
 import { entitlements } from '../../../lib/access';
 
 const FILES = [
-  { key: 'tiles', path: 'tiles.zip', title: 'The whole tile library', note: '2,073 print-ready PNGs + sets.csv + tiles.csv, every chapter at once. Whole Library owners.', all: true },
+  // The tile library ships in three zips (each under Supabase's 50 MB per-file limit). Unzip all three into the same folder.
+  { key: 'tiles1', path: 'tiles-part1of3.zip', title: 'The whole tile library — part 1 of 3', note: '2,265 print-ready PNGs + sets.csv + tiles.csv across three zips. Unzip all three into one folder. Whole Library owners.', all: true },
+  { key: 'tiles2', path: 'tiles-part2of3.zip', title: 'The whole tile library — part 2 of 3', note: 'Unzip into the same folder as part 1.', all: true },
+  { key: 'tiles3', path: 'tiles-part3of3.zip', title: 'The whole tile library — part 3 of 3', note: 'Unzip into the same folder as parts 1 and 2.', all: true },
   { key: 'book', path: 'Read-My-Nails-Library.pdf', title: 'The Library — quick reference', note: 'Every set with its code, the five tile codes and the polish. Searchable PDF for the counter and the printer.' },
   { key: 'menu', path: 'menu-cards.zip', title: 'Menu & station cards', note: 'Price board, how-it-works poster, station cards, counter cards. HTML to edit, PDF to print.' },
   { key: 'script', path: 'session-script.pdf', title: 'The 12-minute session', note: 'How the host runs a session, word for word. Practice five times before opening.' },
