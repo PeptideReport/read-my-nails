@@ -5,14 +5,14 @@ import { useEffect, useState } from 'react';
 const T = {
 en: {
 title: 'Get your chapters', sub: 'Card on the next screen. Your login link and downloads are ready the minute it clears.',
-preview: "You pick your exact chapters in your dashboard after you join — nothing's locked in at checkout.", previewCta: 'Browse all 123 chapters first',
+preview: "You pick your exact chapters in your dashboard after you join — nothing's locked in at checkout.", previewCta: 'Browse all 143 chapters first',
 salon: 'Salon or kiosk name', host: "Host's first name", hostPh: 'Who runs the sessions', email: 'Email for your login', go: 'Continue to payment', busy: 'Opening checkout…',
 fine: 'Chapters you claim are yours to keep · cancel memberships anytime',
 plans: { start: 'Start · $29 · 5 chapters', salon: 'Salon · $59/mo · app + 2 chapters/mo', multi: 'Multi-location · $149/mo', library: 'Whole Library · $699 once', monthly: 'Monthly · $9.99/mo · 1 chapter' },
 },
 es: {
 title: 'Obtén tus capítulos', sub: 'La tarjeta va en la siguiente pantalla. Tu enlace de acceso y las descargas quedan listos al instante.',
-preview: 'Eliges tus capítulos exactos en tu panel después de unirte — nada queda fijo al pagar.', previewCta: 'Explora los 123 capítulos primero',
+preview: 'Eliges tus capítulos exactos en tu panel después de unirte — nada queda fijo al pagar.', previewCta: 'Explora los 143 capítulos primero',
 salon: 'Nombre del salón o kiosco', host: 'Nombre de quien atiende', hostPh: 'Quien dirige las sesiones', email: 'Email para tu acceso', go: 'Continuar al pago', busy: 'Abriendo el pago…',
 fine: 'Los capítulos que reclamas son tuyos para siempre · cancela cuando quieras',
 plans: { start: 'Inicio · $29 · 5 capítulos', salon: 'Salón · $59/mes · app + 2 capítulos/mes', multi: 'Multi-local · $149/mes', library: 'Biblioteca completa · $699 una vez', monthly: 'Mensual · $9.99/mes · 1 capítulo' },
