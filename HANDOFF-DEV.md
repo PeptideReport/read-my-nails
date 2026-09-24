@@ -4,7 +4,7 @@ For Syed Faisal Hussain, deploying on behalf of Scott DelBoccio / Read My Nails,
 
 ## 1. What this is
 
-One Next.js 14 (App Router, JavaScript, no TypeScript) application that is, at once: the public site (EN/ES landing, 1,379 prerendered set pages, 123 chapter pages, salon directory, buyer's guide), a Stripe-subscription SaaS (three tiers, dashboard, downloads), a multi-tenant kiosk app served at `/k/<salon>`, and an "engine" of AI-backed services (chapter writer, suggestions, trust screen, host coach, photo looks, tile renderer, try-on). Data in Supabase (Postgres + Auth + Storage). Hosted on Vercel. Emails via Resend, SMS via Twilio (optional), model calls via Anthropic.
+One Next.js 14 (App Router, JavaScript, no TypeScript) application that is, at once: the public site (EN/ES landing, 1,623 prerendered set pages, 143 chapter pages, salon directory, buyer's guide), a Stripe-subscription SaaS (three tiers, dashboard, downloads), a multi-tenant kiosk app served at `/k/<salon>`, and an "engine" of AI-backed services (chapter writer, suggestions, trust screen, host coach, photo looks, tile renderer, try-on). Data in Supabase (Postgres + Auth + Storage). Hosted on Vercel. Emails via Resend, SMS via Twilio (optional), model calls via Anthropic.
 
 Everything compiles clean (`next build`, 1,543 pages). **Nothing has been run against live Stripe, Supabase, Anthropic, Resend or Twilio accounts.** Section 6 is the test plan that closes that gap.
 
@@ -33,7 +33,7 @@ components/               React client components (Hand, Subscribe, SendToSalon,
 lib/
   supabase.js   service-role client, tenant/PIN/user gates, geocode, uniqueTenant
   stripe.js     PLANS (price ids from env), planHasApp
-  library.js    the 1,379-set library (EN/ES/PT/VI) (data/library.json) + helpers; marks.js = pure helpers shared with the browser
+  library.js    the 1,623-set library (EN/ES/PT/VI) (data/library.json) + helpers; marks.js = pure helpers shared with the browser
   render.js     Satori + resvg: print tiles (size S/M/L, ink), share images, printer profiles (data/printers.json), contrast check
   photo.js      sharp: Photo / Ink / Stamp looks (subject-aware crop, line art, two-tone)
   ai.js         Anthropic wrapper; HOUSE prompt; writeChapter, suggestSets, normalizeSets, chapterCode
