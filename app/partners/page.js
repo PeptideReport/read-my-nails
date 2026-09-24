@@ -48,8 +48,8 @@ return (
 <p className="lede">Read My Nails is a licensed library of nail-art <b>sets</b> — five nails that spell a phrase — plus the kiosk app, generator and public catalog that let a salon sell them. Every printer you sell is a salon that needs a menu. Put ours in the box and earn on every subscription.</p>
 
 <div className="stats" style={{ marginTop: 6 }}>
-<div className="stat"><b>1,379</b><span>coded sets</span></div>
-<div className="stat"><b>123</b><span>chapters</span></div>
+<div className="stat"><b>1,623</b><span>coded sets</span></div>
+<div className="stat"><b>143</b><span>chapters</span></div>
 <div className="stat"><b>EN · ES</b><span>+ PT · VI starters</span></div>
 <div className="stat"><b>&lt; 1 min</b><span>phrase → 5 tiles</span></div>
 </div>
