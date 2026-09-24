@@ -11,7 +11,7 @@ return (
 <h1>Loading tiles, running sessions, pricing a hand.</h1>
 
 <h2>Loading the tiles into your printer</h2>
-<p>The library is 2,073 PNG files, 1500 × 2250 pixels, black on a transparent background, named by tile code (<span className="mono">W-SLAY.png</span>, <span className="mono">E-1f41d.png</span>). Every nail printer that accepts your own images takes them; how you get them in depends on the model.</p>
+<p>The library is 2,265 PNG files, 1500 × 2250 pixels, black on a transparent background, named by tile code (<span className="mono">W-SLAY.png</span>, <span className="mono">E-1f41d.png</span>). Every nail printer that accepts your own images takes them; how you get them in depends on the model.</p>
 <p><b>O’2NAILS with the built-in Android screen (X11 Plus, X12.5, X30):</b> the printer runs the O’2NAILS app itself. Images go into its gallery either through the app&apos;s cloud/import function or from a USB drive plugged into the unit. Copy the <span className="mono">tiles/</span> folder to a USB stick, open the app&apos;s gallery, import the folder. Ask your seller for the exact menu names for your firmware; it changes between versions. If the app only imports one image at a time, load the 60 tiles in Real Puzzles plus your best occasion chapter first and add the rest over the week.</p>
 <p><b>O’2NAILS phone-app models (V11, F1, Nailplayer):</b> the tiles live in the phone app&apos;s &ldquo;My Gallery&rdquo;; add them from the phone&apos;s photo library. Save the tiles to the phone (AirDrop, Google Photos or a USB-C drive), then import.</p>
 <p><b>Jolimark and other Windows/Android printers:</b> point the printer&apos;s image folder at the tiles directory or import through its gallery. Same files.</p>
