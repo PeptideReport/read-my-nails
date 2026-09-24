@@ -60,7 +60,7 @@ Follow README §1–5 exactly (Supabase → Stripe → domain → Resend/Anthrop
 
 - `next.config.js`: `serverComponentsExternalPackages: ['satori','@resvg/resvg-wasm','sharp']` and `outputFileTracingIncludes` for `assets/` and `data/` — keep both or the renderer and the buyer's guide break on Vercel.
 - Function limits: `/api/generator/zip` and `/api/ai/chapter` declare `maxDuration = 60`; `/api/photo`, `/api/ai/host`, `/api/ai/suggest` 30. Hobby plan caps at 60s; Pro raises it. Rendering five tiles is ~2–4s.
-- Emoji in tiles/share images are fetched at render time from `raw.githubusercontent.com/googlefonts/noto-emoji` (fallback jsdelivr) and cached in memory per function instance. If you want zero external calls, vendor the ~3,600 SVGs into `assets/emoji/` and point `loadEmoji` at disk.
+- Emoji in tiles/share images are read from `assets/emoji/` (Noto Emoji SVGs, Apache-2.0 — every emoji the library uses, named `emoji_u<hex>.svg` exactly as `loadEmoji` builds the key). Anything not vendored (generator phrases, AI chapters) falls back to the Noto repo (`2D/svg/`, flags in `third_party/region-flags/waved-svg/`) and is cached in memory per function instance. When a new chapter adds an emoji, drop its SVG into `assets/emoji/`.
 - Storage bucket `library` must be **private**; the dashboard signs URLs for one hour.
 - `vercel.json` cron hits `/api/cron/onboarding` daily at 14:00 UTC with `Authorization: Bearer $CRON_SECRET`.
 - Supabase Auth emails: switch SMTP to Resend early; the built-in sender is rate-limited to ~3/hour.
