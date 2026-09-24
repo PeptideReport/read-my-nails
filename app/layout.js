@@ -2,7 +2,7 @@ import './globals.css';
 
 export const metadata = {
   title: 'Read My Nails — the menu your nail printer is missing',
-  description: '1,379 named nail-art sets that spell something, in English, Spanish, Portuguese and Vietnamese. Codes, menu cards, a customer ordering app and the 12-minute session, for salons and kiosks with a nail printer.',
+  description: '1,623 named nail-art sets that spell something, in English, Spanish, Portuguese and Vietnamese. Codes, menu cards, a customer ordering app and the 12-minute session, for salons and kiosks with a nail printer.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://readmynails.com'),
   openGraph: { title: 'Read My Nails', description: 'The menu your nail printer is missing.', images: ['/logo.png'] },
 };

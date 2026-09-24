@@ -4,7 +4,7 @@
 
 **Developers start with `HANDOFF-DEV.md`.**
 
-One Next.js app. Public: landing (EN + ES), the whole library as browsable pages (123 chapter pages, 1,379 set pages with share images), the nail-printer buyer's guide, the salon directory with a map, party links. Paid: Stripe subscription checkout in three tiers, salon dashboard (downloads, kiosk address, PIN, profile + directory listing, 30-day chapter sales, network trending, billing), the set generator, and every licensee's kiosk app at `/k/<salon>`. Supabase holds the data and the files. Vercel serves it. Resend sends the emails.
+One Next.js app. Public: landing (EN + ES), the whole library as browsable pages (143 chapter pages, 1,623 set pages with share images), the nail-printer buyer's guide, the salon directory with a map, party links. Paid: Stripe subscription checkout in three tiers, salon dashboard (downloads, kiosk address, PIN, profile + directory listing, 30-day chapter sales, network trending, billing), the set generator, and every licensee's kiosk app at `/k/<salon>`. Supabase holds the data and the files. Vercel serves it. Resend sends the emails.
 
 **Cost to run:** Vercel Hobby $0 (Pro $20/mo when you want a team) · Supabase Free $0 (Pro $25/mo past 500 MB storage) · Stripe 2.9% + 30¢ · Resend free to 3,000 emails/month · maps are OpenStreetMap, free. Domain already owned.
 
@@ -67,7 +67,7 @@ Pricing → fake salon → pay (test card) → Welcome → login link → dashbo
 |---|---|
 | `/`, `/es` | Landing, pricing (3 tiers), signup → Stripe. `?ref=CODE` credits a partner for 30 days. |
 | `/library`, `/library/<lang>/<chapter>` | Every chapter as a public page, hands drawn in CSS, SEO titles. |
-| `/s/<CODE>` | Every set as a public page: hand, share image (`/api/og/<CODE>`), Send to a salon, share buttons, recipe. 1,379 of them, prerendered. |
+| `/s/<CODE>` | Every set as a public page: hand, share image (`/api/og/<CODE>`), Send to a salon, share buttons, recipe. 1,623 of them, prerendered. |
 | `/salons`, `/salons/<salon>` | Directory with map (listed + paying salons only), salon profile, party-link maker. |
 | `/party/<id>` | A party link: sets a 30-day cookie so every set sent lands at that salon under the party's name. |
 | `/nail-printers` | The buyer's guide. Traffic magnet. Edit `data/nail-printer-review.html`. |
