@@ -7,14 +7,14 @@ import { Nav, Footer } from '../components/Site';
 const HERO = [
   { n: ['🐝|sun', 'U|', 'TI|', 'FUL|', '✨|sun'], a: 'Bee-U-tiful', c: 'EN-PUZZL-02' },
   { n: ['MAID|', 'OF|lilac', '🍯|', '👗|lilac', '💜|'], a: 'Maid of honey', c: 'EN-BRIDE-03' },
-  { n: ['TÚ|', 'PUEDES|pink', '💪|', '✨|pink', '💗|'], a: 'Tú puedes', c: 'ES-INSPI-01' },
+  { n: ['TÚ|pink', 'PUE|sky', 'DES|mint', '💪|', '✨|'], a: 'Tú puedes', c: 'ES-INSPI-01' },
   { n: ['IN|', 'MY|pink', '🎀|', 'ERA|pink', '✨|'], a: 'In my bow era', c: 'EN-ERA-01' },
-  { n: ['MIS|pink', 'QUINCE|', '1️⃣5️⃣|pink', '👑|', '💗|'], a: 'Mis quince', c: 'EN-QUINC-02' },
-  { n: ['MOM|', 'IS|', 'MY|', 'BFF|pink', '💗|'], a: 'Mom is my BFF', c: 'EN-MOM-06' },
+  { n: ['MIS|pink', 'QUIN|sky', 'CE|mint', '15|sun', '👑|'], a: 'Mis quince', c: 'EN-QUINC-02' },
+  { n: ['MOM|pink', 'IS|', 'MY|', 'BFF|pink', '💗|'], a: 'Mom is my BFF', c: 'EN-MOM-06' },
 ];
 const SAMPLES = [
   { n: ['👁️|', '🐝|sun', 'LEAF|', 'IN|', 'U|'], a: 'I believe in you', c: 'EN-PUZZL-03' },
-  { n: ['HOME|', 'COMING|pink', '👑|', '26|pink', '🌹|'], a: 'Homecoming 2026', c: 'EN-SCHOO-02' },
+  { n: ['HOME|pink', 'COM|sky', 'ING|mint', '👑|', '26|sun'], a: 'Homecoming 2026', c: 'EN-SCHOO-02' },
   { n: ['🐶|pink', 'MOM|', '📷|', '🦴|', '❤️|pink'], a: 'Dog mom — her real dog', c: 'EN-LOVE-01' },
   { n: ['GRAD|sun', '🎓|', '2026|sun', '🎉|', '✨|'], a: 'Graduation 2026', c: 'EN-OCCAS-01' },
   { n: ['NOT|ink', 'A|', 'PHASE|ink', '🖤|', '🖤|ink'], a: 'Not a phase', c: 'EN-ALT-01' },
@@ -33,7 +33,7 @@ export default function Home() {
           <div>
             <p className="eyebrow">For salons and kiosks with a nail printer</p>
             <h1 style={{ margin: '12px 0 18px' }}>The menu your <span>nail printer</span> is missing.</h1>
-            <p className="lede">Your printer can put anything on a nail. Your customers still stand there asking what they should get. Read My Nails is 1,379 named sets that <em>say something</em> across five nails, with the codes, the menu cards, the ordering app and the 12-minute session to sell them.</p>
+            <p className="lede">Your printer can put anything on a nail. Your customers still stand there asking what they should get. Read My Nails is 1,623 named sets that <em>say something</em> across five nails, with the codes, the menu cards, the ordering app and the 12-minute session to sell them.</p>
             <div className="cta" style={{ marginTop: 26 }}>
               <a className="btn pink" href="#pricing">Start for $29 · 5 chapters</a>
               <a className="btn ghost" href="/library">Browse the library</a>
@@ -45,9 +45,9 @@ export default function Home() {
 
         <section className="wrap" style={{ paddingBottom: 56 }}>
           <div className="stats">
-            <div className="stat"><b>1,379</b><span>named, coded sets</span></div>
-            <div className="stat"><b>123</b><span>chapters · English, Spanish, Portuguese, Vietnamese</span></div>
-            <div className="stat"><b>2,073</b><span>print-ready tiles, loaded once</span></div>
+            <div className="stat"><b>1,623</b><span>named, coded sets</span></div>
+            <div className="stat"><b>143</b><span>chapters · English, Spanish, Portuguese, Vietnamese</span></div>
+            <div className="stat"><b>2,265</b><span>print-ready tiles, loaded once</span></div>
             <div className="stat"><b>12 min</b><span>per hand, customer does the work</span></div>
           </div>
         </section>
@@ -76,8 +76,8 @@ export default function Home() {
             <h2>The Read My Nails library</h2>
             <p className="sub">Everything a location needs to sell sets from day one. One license per location.</p>
             <ul className="menu">
-              <li><span className="name">The set library</span><span className="dots" /><span className="tag">1,379 sets</span><p className="what">Every set drawn, named and coded (<span className="mono">EN-BRIDE-03</span>). 70 English chapters, 51 written-in-Spanish chapters, and first chapters in Portuguese and Vietnamese. Split sets for two friends, Mom &amp; Me pairs, photo nails for her real dog or his last name.</p></li>
-              <li><span className="name">The print tiles</span><span className="dots" /><span className="tag">2,073 PNGs</span><p className="what">Black-on-transparent, 1500 × 2250, sized for the nail. Load them into the printer once; the host taps five tiles per hand. Color comes from the polish, so ink cost stays under $2 a hand.</p></li>
+              <li><span className="name">The set library</span><span className="dots" /><span className="tag">1,623 sets</span><p className="what">Every set drawn, named and coded (<span className="mono">EN-BRIDE-03</span>). 70 English chapters, 51 written-in-Spanish chapters, and first chapters in Portuguese and Vietnamese. Split sets for two friends, Mom &amp; Me pairs, photo nails for her real dog or his last name.</p></li>
+              <li><span className="name">The print tiles</span><span className="dots" /><span className="tag">2,265 PNGs</span><p className="what">Black-on-transparent, 1500 × 2250, sized for the nail. Load them into the printer once; the host taps five tiles per hand. Color comes from the polish, so ink cost stays under $2 a hand.</p></li>
               <li><span className="name">The ordering app</span><span className="dots" /><span className="tag">your name on it</span><p className="what">Customers browse and customize on the tablet, get a five-letter code and a QR. The host&apos;s phone shows the queue with the five tile codes and the polish. Day sheet, CSV export, party bookings. Your salon name, your prices, your host&apos;s name.</p></li>
               <li><span className="name">The book</span><span className="dots" /><span className="tag">140 pages</span><p className="what">Every set with its code, English and Spanish, the way a menu should look on the counter. Print one and let it get dog-eared.</p></li>
               <li><span className="name">Menu cards &amp; signs</span><span className="dots" /><span className="tag">print-ready</span><p className="what">Price board, how-it-works poster, station cards, counter cards. PDF to print, HTML to change the prices.</p></li>
@@ -93,7 +93,7 @@ export default function Home() {
           <p className="eyebrow">How it works</p>
           <h2 style={{ margin: '10px 0 28px' }}>Three steps. The customer does the third one.</h2>
           <div className="steps">
-            <div className="step"><h3>Load the tiles once</h3><p>Upload the 2,073 PNGs to your printer. Every set in the library is five of those tiles by code.</p><span className="time">One afternoon</span></div>
+            <div className="step"><h3>Load the tiles once</h3><p>Upload the 2,265 PNGs to your printer. Every set in the library is five of those tiles by code.</p><span className="time">One afternoon</span></div>
             <div className="step"><h3>She picks a set on the tablet</h3><p>Browses by chapter, taps a nail to change a word or add a photo, gets a code. The host&apos;s phone shows the five tiles and the polish.</p><span className="time">2 minutes</span></div>
             <div className="step"><h3>The host taps, she prints</h3><p>Base coat, cure, the host taps the tile, the customer puts her own finger in. Five nails, top coat, done. She keeps the code for next time.</p><span className="time">12 minutes a hand</span></div>
           </div>
@@ -101,7 +101,7 @@ export default function Home() {
 
         <section className="wrap section">
           <p className="eyebrow">From the library</p>
-          <h2 style={{ margin: '10px 0 28px' }}>Six of the 1,379.</h2>
+          <h2 style={{ margin: '10px 0 28px' }}>Six of the 1,623.</h2>
           <div className="samples">
             {SAMPLES.map(s => (
               <a className="sample setlink" href={'/s/' + s.c} key={s.c}>
@@ -132,7 +132,7 @@ export default function Home() {
         <section className="wrap section two" id="generator">
           <div>
             <p className="eyebrow">For the salon</p>
-            <h2 style={{ marginTop: 10 }}>1,379 sets is the menu. The generator is the kitchen.</h2>
+            <h2 style={{ marginTop: 10 }}>1,623 sets is the menu. The generator is the kitchen.</h2>
           </div>
           <div className="measure" style={{ display: 'grid', gap: 14 }}>
             <p>A customer wants <b>SOFIA&apos;S 15 👑</b> and it isn&apos;t in the book. Type it. The generator splits it across five nails, you pick the polish, and the print tiles download in the same size and font as the library. Two minutes from &ldquo;can you do…&rdquo; to the printer.</p>
@@ -195,7 +195,7 @@ export default function Home() {
               <h3>Whole Library</h3>
               <div className="price">$699<small> once</small></div>
               <ul>
-                <li><b>Every chapter</b> &mdash; 123 chapters, 1,379 sets, 2,073 tiles</li>
+                <li><b>Every chapter</b> &mdash; 143 chapters, 1,623 sets, 2,265 tiles</li>
                 <li>Yours forever, one download</li>
                 <li>Add $9.99/mo for new chapters as they drop</li>
                 <li>Files only &mdash; the app is the Salon plan</li>
