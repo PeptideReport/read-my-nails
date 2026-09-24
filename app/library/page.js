@@ -6,7 +6,7 @@ import { globalChapters } from '../../lib/custom';
 export const revalidate = 300;
 
 export const metadata = {
-  title: 'The Read My Nails library — 1,379 nail art sets that say something',
+  title: 'The Read My Nails library — 1,623 nail art sets that say something',
   description: 'Browse every chapter: prom, quinceañera, bride tribe, besties, game day, anime, faith and 80 more. English and Spanish. Pick a set and send it to a salon near you.',
   alternates: { canonical: '/library' },
 };

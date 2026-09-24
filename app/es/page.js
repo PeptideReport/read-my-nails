@@ -5,23 +5,23 @@ import { Nav, Footer } from '../../components/Site';
 
 export const metadata = {
   title: 'Read My Nails — el menú que le falta a tu impresora de uñas',
-  description: '1,379 sets de nail art que dicen algo, en español e inglés. Códigos, tarjetas de menú, app de pedidos y la sesión de 12 minutos, para salones y kioscos con impresora de uñas.',
+  description: '1,623 sets de nail art que dicen algo, en español e inglés. Códigos, tarjetas de menú, app de pedidos y la sesión de 12 minutos, para salones y kioscos con impresora de uñas.',
   alternates: { canonical: '/es', languages: { en: '/', es: '/es' } },
 };
 
 const HERO = [
-  { n: ['TÚ|', 'PUEDES|pink', '💪|', '✨|pink', '💗|'], a: 'Tú puedes', c: 'ES-INSPI-01' },
+  { n: ['TÚ|pink', 'PUE|sky', 'DES|mint', '💪|', '✨|'], a: 'Tú puedes', c: 'ES-INSPI-01' },
   { n: ['R|pink', 'E|', 'I|pink', 'N|', 'A|pink'], a: 'Reina', c: 'ES-REINA-01' },
-  { n: ['MIS|pink', 'QUINCE|', '1️⃣5️⃣|pink', '👑|', '💗|'], a: 'Mis quince', c: 'EN-QUINC-02' },
+  { n: ['MIS|pink', 'QUIN|sky', 'CE|mint', '15|sun', '👑|'], a: 'Mis quince', c: 'EN-QUINC-02' },
   { n: ['👁️|', 'ALÁ|sun', '👁️|', 'ALÁ|sun', '🙏|'], a: 'Ojalá, ojalá', c: 'ES-ACERT-01' },
   { n: ['🐝|sun', 'U|', 'TI|', 'FUL|', '✨|sun'], a: 'Bee-U-tiful', c: 'EN-PUZZL-02' },
 ];
 const SAMPLES = [
   { n: ['👁️|', 'ALÁ|sun', '👁️|', 'ALÁ|sun', '🙏|'], a: 'Ojalá, ojalá', c: 'ES-ACERT-01' },
-  { n: ['MIS|pink', 'QUINCE|', '1️⃣5️⃣|pink', '👑|', '💗|'], a: 'Mis quince', c: 'EN-QUINC-02' },
+  { n: ['MIS|pink', 'QUIN|sky', 'CE|mint', '15|sun', '👑|'], a: 'Mis quince', c: 'EN-QUINC-02' },
   { n: ['R|pink', 'E|', 'I|pink', 'N|', 'A|pink'], a: 'Reina', c: 'ES-REINA-01' },
   { n: ['GRAD|sun', '🎓|', '2026|sun', '🎉|', '✨|'], a: 'Graduación 2026', c: 'EN-OCCAS-01' },
-  { n: ['MOM|', 'IS|', 'MY|', 'BFF|pink', '💗|'], a: 'Mom is my BFF', c: 'EN-MOM-06' },
+  { n: ['MOM|pink', 'IS|', 'MY|', 'BFF|pink', '💗|'], a: 'Mom is my BFF', c: 'EN-MOM-06' },
   { n: ['NOT|ink', 'A|', 'PHASE|ink', '🖤|', '🖤|ink'], a: 'Not a phase', c: 'EN-ALT-01' },
 ];
 
@@ -34,7 +34,7 @@ export default function HomeES() {
           <div>
             <p className="eyebrow">Para salones y kioscos con impresora de uñas</p>
             <h1 style={{ margin: '12px 0 18px' }}>El menú que le falta a tu <span>impresora de uñas</span>.</h1>
-            <p className="lede">Tu impresora pone lo que sea en una uña. Tus clientas siguen preguntando qué se ponen. Read My Nails son 1,379 sets con nombre que <em>dicen algo</em> en cinco uñas, con los códigos, las tarjetas de menú, la app de pedidos y la sesión de 12 minutos para venderlos.</p>
+            <p className="lede">Tu impresora pone lo que sea en una uña. Tus clientas siguen preguntando qué se ponen. Read My Nails son 1,623 sets con nombre que <em>dicen algo</em> en cinco uñas, con los códigos, las tarjetas de menú, la app de pedidos y la sesión de 12 minutos para venderlos.</p>
             <div className="cta" style={{ marginTop: 26 }}>
               <a className="btn pink" href="#pricing">Empieza por $29 · 5 capítulos</a>
               <a className="btn ghost" href="/library#es">Ver los sets</a>
@@ -46,9 +46,9 @@ export default function HomeES() {
 
         <section className="wrap" style={{ paddingBottom: 56 }}>
           <div className="stats">
-            <div className="stat"><b>1,379</b><span>sets con nombre y código</span></div>
+            <div className="stat"><b>1,623</b><span>sets con nombre y código</span></div>
             <div className="stat"><b>42</b><span>capítulos escritos en español, no traducidos</span></div>
-            <div className="stat"><b>2,073</b><span>archivos de impresión, se cargan una vez</span></div>
+            <div className="stat"><b>2,265</b><span>archivos de impresión, se cargan una vez</span></div>
             <div className="stat"><b>12 min</b><span>por mano; la clienta hace el trabajo</span></div>
           </div>
         </section>
@@ -77,8 +77,8 @@ export default function HomeES() {
             <h2>La biblioteca Read My Nails</h2>
             <p className="sub">Todo lo que un local necesita para vender sets desde el primer día. Una licencia por local.</p>
             <ul className="menu">
-              <li><span className="name">La biblioteca de sets</span><span className="dots" /><span className="tag">1,379 sets</span><p className="what">Cada set dibujado, con nombre y código (<span className="mono">ES-REINA-01</span>). 51 capítulos en español (Acertijos, Reina Era, Familia, Abuela y Yo, Papá y Yo, Despedida, Fe, Antojitos…) y 70 en inglés. Sets divididos para dos amigas, Mamá y Yo, uñas con foto.</p></li>
-              <li><span className="name">Los archivos de impresión</span><span className="dots" /><span className="tag">2,073 PNG</span><p className="what">Negro sobre transparente, 1500 × 2250. Se cargan una vez; la anfitriona toca cinco por mano. El color viene del esmalte, así que la tinta cuesta menos de $2 por mano.</p></li>
+              <li><span className="name">La biblioteca de sets</span><span className="dots" /><span className="tag">1,623 sets</span><p className="what">Cada set dibujado, con nombre y código (<span className="mono">ES-REINA-01</span>). 51 capítulos en español (Acertijos, Reina Era, Familia, Abuela y Yo, Papá y Yo, Despedida, Fe, Antojitos…) y 70 en inglés. Sets divididos para dos amigas, Mamá y Yo, uñas con foto.</p></li>
+              <li><span className="name">Los archivos de impresión</span><span className="dots" /><span className="tag">2,265 PNG</span><p className="what">Negro sobre transparente, 1500 × 2250. Se cargan una vez; la anfitriona toca cinco por mano. El color viene del esmalte, así que la tinta cuesta menos de $2 por mano.</p></li>
               <li><span className="name">La app de pedidos</span><span className="dots" /><span className="tag">con tu nombre</span><p className="what">La clienta escoge y personaliza en la tablet y recibe un código de cinco letras y un QR. El teléfono de la anfitriona muestra la cola con los cinco archivos y el esmalte. Hoja del día, exportar CSV, reservas de fiestas.</p></li>
               <li><span className="name">El generador de sets</span><span className="dots" /><span className="tag">cualquier frase</span><p className="what">Escribe lo que ella quiere. Se reparte en cinco uñas, eliges el esmalte, y los archivos bajan en el mismo formato de la biblioteca.</p></li>
               <li><span className="name">El libro</span><span className="dots" /><span className="tag">140 páginas</span><p className="what">Cada set con su código, español e inglés. Imprime uno para el mostrador.</p></li>
@@ -92,7 +92,7 @@ export default function HomeES() {
 
         <section className="wrap section">
           <p className="eyebrow">De la biblioteca</p>
-          <h2 style={{ margin: '10px 0 28px' }}>Seis de los 1,379.</h2>
+          <h2 style={{ margin: '10px 0 28px' }}>Seis de los 1,623.</h2>
           <div className="samples">
             {SAMPLES.map(s => <a className="sample setlink" href={'/s/' + s.c} key={s.c}><Hand set={s} small /><div className="hand-meta"><span className="ans">“{s.a}”</span><span className="code mono">{s.c}</span></div></a>)}
           </div>
@@ -117,7 +117,7 @@ export default function HomeES() {
             <div className="plan"><h3>Inicio</h3><div className="price">$29<small> una vez</small></div><ul><li><b>5 créditos de capítulo</b> &mdash; elige cinco</li><li>Archivos en el formato de tu impresora, códigos, hojas de receta</li><li>Libro, tarjetas, guion de sesión</li><li>Luego $9.99/mes por un capítulo nuevo cada mes, si quieres</li></ul><PickPlan plan="start">Elegir Inicio</PickPlan></div>
             <div className="plan best"><span className="save">La mayoría</span><h3>Salón</h3><div className="price">$59<small> /mes</small></div><ul><li><b>2 créditos de capítulo cada mes</b></li><li>La app de pedidos en tu propia dirección</li><li>El generador: cualquier frase, cinco archivos</li><li>En el directorio; las clientas te envían sets desde este sitio</li></ul><PickPlan plan="salon" className="btn pink sm">Elegir Salón</PickPlan></div>
             <div className="plan"><h3>Multi-local</h3><div className="price">$149<small> /mes</small></div><ul><li>Todo lo de Salón, hasta 3 locales</li><li><b>6 créditos cada mes</b>, compartidos</li><li>Cada uno con su kiosco, PIN y página</li><li>Una sola factura</li></ul><PickPlan plan="multi">Elegir Multi</PickPlan></div>
-            <div className="plan"><h3>Biblioteca completa</h3><div className="price">$699<small> una vez</small></div><ul><li><b>Todos los capítulos</b> &mdash; 123 capítulos, 1,379 sets, 2,073 archivos</li><li>Tuya para siempre, una descarga</li><li>Añade $9.99/mes para recibir los capítulos nuevos</li><li>Solo archivos &mdash; la app es el plan Salón</li></ul><PickPlan plan="library">Elegir Biblioteca</PickPlan></div>
+            <div className="plan"><h3>Biblioteca completa</h3><div className="price">$699<small> una vez</small></div><ul><li><b>Todos los capítulos</b> &mdash; 143 capítulos, 1,623 sets, 2,265 archivos</li><li>Tuya para siempre, una descarga</li><li>Añade $9.99/mes para recibir los capítulos nuevos</li><li>Solo archivos &mdash; la app es el plan Salón</li></ul><PickPlan plan="library">Elegir Biblioteca</PickPlan></div>
           </div>
           <Subscribe lang="es" />
           <p className="muted" style={{ marginTop: 16, fontSize: '0.95rem' }}>¿Un capítulo más? <b>$14.99</b> cada uno, o <b>tres por $35</b>, desde tu panel. Los créditos duran 12 meses; los capítulos que reclamas nunca caducan. Cancela cuando quieras desde tu panel.</p>
